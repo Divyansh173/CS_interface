@@ -15,7 +15,6 @@ namespace CS_Gen_App.Models
     public interface IDbOperations<TEntity, in TPk> where TEntity : Staff
     {
         Dictionary<int, Staff> GetAll();
-        TEntity Get(TPk id);
         void Create(int id,TEntity entity);
         Dictionary<int, Staff> Update(TPk id, TEntity entity);
         Dictionary<int, Staff> Delete(TPk id);
