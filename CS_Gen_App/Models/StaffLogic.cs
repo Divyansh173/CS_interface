@@ -73,6 +73,7 @@ namespace CS_Gen_App.Models
                         a.ShiftStartTime = Convert.ToInt32(Console.ReadLine());
                         a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
                         a.Staffcategory = Console.ReadLine();
+                        a.DeptName = Console.ReadLine();
                         a.Education = Console.ReadLine();
                         a.Specilization = Console.ReadLine();
                     }

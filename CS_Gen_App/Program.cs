@@ -29,8 +29,6 @@ do {
             string str = Console.ReadLine().ToLower();           
             if (str == "doctor")
             {
-                Console.WriteLine("Enter the key");
-                int id1 = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
                 Doctor d1 = new Doctor()
                 {
@@ -41,15 +39,14 @@ do {
                     ShiftStartTime = Convert.ToInt32(Console.ReadLine()),
                     ShiftEndTime = Convert.ToInt32(Console.ReadLine()),
                     Staffcategory = Console.ReadLine(),
+                    DeptName = Console.ReadLine(),
                     Education = Console.ReadLine(),
                     Specilization = Console.ReadLine()
                 };
-                logic.Create(id1, d1);
+                logic.Create(d1.StaffId, d1);
             }
             else if (str == "nurse")
             {
-                Console.WriteLine("Enter the key");
-                int id1 = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
                 Nurse n1 = new Nurse()
                 {
@@ -60,17 +57,16 @@ do {
                     ShiftStartTime = Convert.ToInt32(Console.ReadLine()),
                     ShiftEndTime = Convert.ToInt32(Console.ReadLine()),
                     Staffcategory = Console.ReadLine(),
+                    DeptName = String.Empty,
                     Experience = Convert.ToInt32(Console.ReadLine()),
                     
                 };
-                logic1.Create(id1, n1);
+                logic1.Create(n1.StaffId, n1);
             }
             else if (str == "driver")
             {
-                Console.WriteLine("Enter the key");
-                int id1 = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
-                Driver d1 = new Driver()
+                Driver dr = new Driver()
                 {
                     StaffId = Convert.ToInt32(Console.ReadLine()),
                     StaffName = Console.ReadLine(),
@@ -79,10 +75,11 @@ do {
                     ShiftStartTime = Convert.ToInt32(Console.ReadLine()),
                     ShiftEndTime = Convert.ToInt32(Console.ReadLine()),
                     Staffcategory = Console.ReadLine(),
+                    DeptName = String.Empty,
                     VehicleType = Console.ReadLine(),
 
                 };
-                logic2.Create(id1, d1);
+                logic2.Create(dr.StaffId, dr);
             }
             break;
        case 2:
@@ -99,7 +96,7 @@ do {
                     if (s.Value.StaffId == id)
                     {
                         var a = (Doctor)s.Value;
-                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Education}  {a.Specilization} ");
+                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.DeptName}  {a.Education}  {a.Specilization} ");
                         break;
 
                     }
@@ -215,17 +212,17 @@ do {
                         Console.WriteLine();
                         Console.WriteLine();
                         Console.WriteLine("Income Details");
-                        Console.WriteLine("================================================");
-                        Console.WriteLine($"Gross Income = {accounts.GrossInsome(staff)}");
+                        Console.WriteLine("=====================================================");
+                        Console.WriteLine($"Gross Income = \t \t \t \t \t{accounts.GrossInsome(staff)}");
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.WriteLine($"HospitalShare = {accounts.HospitalShare(staff)}");
+                        Console.WriteLine($"HospitalShare = \t \t \t \t \t{accounts.HospitalShare(staff)}");
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.WriteLine($"HospitalShare = {accounts.GetTax(staff)}");
+                        Console.WriteLine($"HospitalShare = \t \t \t \t \t{accounts.GetTax(staff)}");
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.WriteLine($"HospitalShare = {accounts.GetStaffIncome(staff)}");
+                        Console.WriteLine($"HospitalShare = \t \t \t \t \t{accounts.GetStaffIncome(staff)}");
 
                     }
                     else {
@@ -269,6 +266,7 @@ do {
                             Console.WriteLine();
                             Console.WriteLine();
                             Console.WriteLine($"HospitalShare = {accounts.GetStaffIncome(staff)}");
+                            Console.ReadLine();
 
                         }
                         else

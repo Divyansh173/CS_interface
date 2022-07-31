@@ -15,7 +15,9 @@ namespace CS_Gen_App.Entities
         public int ShiftStartTime { get; set; }
         public int ShiftEndTime { get; set; }
 
-        public string Staffcategory { get; set; }
+        public string Staffcategory { get; set; } = string.Empty ;
+
+        public string DeptName { get; set; } = string.Empty;
     }
 
     public class Doctor : Staff
