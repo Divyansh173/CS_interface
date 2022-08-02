@@ -18,6 +18,8 @@ namespace CS_Gen_App.Entities
         public string Staffcategory { get; set; } = string.Empty ;
 
         public string DeptName { get; set; } = string.Empty;
+
+        public string Location { get; set; } = string.Empty;
     }
 
     public class Doctor : Staff
@@ -29,11 +31,15 @@ namespace CS_Gen_App.Entities
     public class Nurse : Staff
     {
         public int Experience { get; set; }
+
+        public int AssignedRoom { get; set; }
     }
 
     public class Driver : Staff
     {
         public string VehicleType { get; set; }
+
+        public int Experience { get; set; }
     }
 
 }

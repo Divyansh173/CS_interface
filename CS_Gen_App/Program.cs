@@ -12,6 +12,26 @@ IDbOperations<Nurse, int> logic1 = new NurseLogic();
 Driver driver = new Driver();
 IDbOperations<Driver, int> logic2 = new DriverLogic();
 
+Hsearch search = new Hsearch();
+
+
+Doctor doc1 = new Doctor() { StaffId = 1, StaffName = "Divyansh", Email = "divyansh@Movie.com", contactno = 998899, Education = "M.B.B.S", ShiftStartTime = 8, ShiftEndTime = 20, DeptName = "Cancer", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
+logic.Create(doc1.StaffId, doc1);
+Doctor doc2 = new Doctor() { StaffId = 2, StaffName = "omkar", Email = "omkar@Movie.com", contactno = 997799, Education = "B.A.M.S", ShiftStartTime = 7, ShiftEndTime = 19, DeptName = "Heart", Staffcategory = "doctor", Location = "mumbai", Specilization = "cancer" };
+logic.Create(doc2.StaffId, doc2);
+Doctor doc3 = new Doctor() { StaffId = 3, StaffName = "rahul", Email = "rahul@Movie.com", contactno = 996699, Education = "B.A.M.S", ShiftStartTime = 8, ShiftEndTime = 20, DeptName = "Heart", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
+logic.Create(doc3.StaffId, doc3);
+Doctor doc4 = new Doctor() { StaffId = 4, StaffName = "vivek", Email = "vivek@Movie.com", contactno = 995599, Education = "B.H.M.S", ShiftStartTime = 9, ShiftEndTime = 21, DeptName = "Cancer", Staffcategory = "doctor", Location = "chennai", Specilization = "cancer" };
+logic.Create(doc4.StaffId, doc4);
+Doctor doc5 = new Doctor() { StaffId = 5, StaffName = "omkar", Email = "omkar@Movie.com", contactno = 994499, Education = "M.B.B.S", ShiftStartTime = 10, ShiftEndTime = 22, DeptName = "eye", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
+logic.Create(doc5.StaffId, doc5);
+Doctor doc6 = new Doctor() { StaffId = 6, StaffName = "anurag", Email = "anurag@Movie.com", contactno = 993399, Education = "M.B.B.S", ShiftStartTime = 9, ShiftEndTime = 21, DeptName = "Cancer", Staffcategory = "doctor", Location = "mumbai", Specilization = "cancer" };
+logic.Create(doc6.StaffId, doc6);
+Doctor doc7 = new Doctor() { StaffId = 7, StaffName = "rohan", Email = "rohan@Movie.com", contactno = 992299, Education = "B.H.M.S", ShiftStartTime = 10, ShiftEndTime = 22, DeptName = "eye", Staffcategory = "doctor", Location = "chennai", Specilization = "cancer" };
+logic.Create(doc7.StaffId, doc7);
+Doctor doc8 = new Doctor() { StaffId = 8, StaffName = "sachin", Email = "sachin@Movie.com", contactno = 991199, Education = "ssc", ShiftStartTime = 8, ShiftEndTime = 20, DeptName = "driving", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
+logic.Create(doc8.StaffId, doc8);
+
 string want_to_continue = "y";
 do {
     Console.WriteLine("1.Enter new Record");
@@ -47,7 +67,7 @@ do {
             }
             else if (str == "nurse")
             {
-                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
+                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  Education  Speclization");
                 Nurse n1 = new Nurse()
                 {
                     StaffId = Convert.ToInt32(Console.ReadLine()),
@@ -57,15 +77,17 @@ do {
                     ShiftStartTime = Convert.ToInt32(Console.ReadLine()),
                     ShiftEndTime = Convert.ToInt32(Console.ReadLine()),
                     Staffcategory = Console.ReadLine(),
+                    Location = Console.ReadLine(),
                     DeptName = String.Empty,
                     Experience = Convert.ToInt32(Console.ReadLine()),
+                    AssignedRoom = Convert.ToInt32(Console.ReadLine()),
                     
                 };
                 logic1.Create(n1.StaffId, n1);
             }
             else if (str == "driver")
             {
-                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
+                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  VehicleType  Experience");
                 Driver dr = new Driver()
                 {
                     StaffId = Convert.ToInt32(Console.ReadLine()),
@@ -75,8 +97,10 @@ do {
                     ShiftStartTime = Convert.ToInt32(Console.ReadLine()),
                     ShiftEndTime = Convert.ToInt32(Console.ReadLine()),
                     Staffcategory = Console.ReadLine(),
+                    Location = Console.ReadLine(),
                     DeptName = String.Empty,
                     VehicleType = Console.ReadLine(),
+                    Experience = Convert.ToInt32(Console.ReadLine()),
 
                 };
                 logic2.Create(dr.StaffId, dr);
@@ -85,19 +109,19 @@ do {
        case 2:
             Console.WriteLine("Enter staffcategory to get the details");
             string str1 = Console.ReadLine().ToLower();
-            Console.WriteLine("Enter the staffId");
-            int id = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("Enter the staffId");
+            //int id = Convert.ToInt32(Console.ReadLine());
             var Staffs1 = logic.GetAll();
 
             if (str1 == "doctor")
             {
                 foreach (KeyValuePair<int, Staff> s in Staffs1)
                 {
-                    if (s.Value.StaffId == id)
+                    if (Convert.ToString(s.Value.GetType()).Contains("Doctor"))
                     {
                         var a = (Doctor)s.Value;
-                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.DeptName}  {a.Education}  {a.Specilization} ");
-                        break;
+                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Location}  {a.DeptName}  {a.Education}  {a.Specilization} ");
+                        
 
                     }
                 }
@@ -106,10 +130,10 @@ do {
             {
                 foreach (KeyValuePair<int, Staff> s in Staffs1)
                 {
-                    if (s.Value.StaffId == id)
+                    if (Convert.ToString(s.Value.GetType()).Contains("Nurse"))
                     {
                         var a = (Nurse)s.Value;
-                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Experience}");
+                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Location}  {a.Experience}  {a.AssignedRoom}");
                         break;
 
                     }
@@ -119,10 +143,10 @@ do {
             {
                 foreach (KeyValuePair<int, Staff> s in Staffs1)
                 {
-                    if (s.Value.StaffId == id)
+                    if (Convert.ToString(s.Value.GetType()).Contains("Driver"))
                     {
                         var a = (Driver)s.Value;
-                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.VehicleType}");
+                        Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Location}  {a.VehicleType}  {a.Experience}");
                         break;
 
                     }
@@ -137,7 +161,7 @@ do {
                 Doctor d = new Doctor();
                 Console.WriteLine("Enter key to be updated");
                 int id4 = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Specilization");
+                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  DeptNmae  Education  Specilization");
                 logic = new DoctorLogic();
                 logic.Update(id4, d);
             }
@@ -146,7 +170,7 @@ do {
                 Nurse n = new Nurse();
                 Console.WriteLine("Enter key to be updated");
                 int id4 = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Specilization");
+                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  Experience  AssignedRoom");
                 logic1 = new NurseLogic();
                 logic1.Update(id4, n);
             }
@@ -155,7 +179,7 @@ do {
                 Driver dr = new Driver();
                 Console.WriteLine("Enter key to be updated");
                 int id4 = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Specilization");
+                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  VwhicleType  Experience");
                 logic2 = new DriverLogic();
                 logic2.Update(id4, dr);
             }
@@ -232,7 +256,7 @@ do {
 
             }
             else if (str6 == "nurse")
-                {
+            {
                     Console.WriteLine("Enter the StaffId");
                     int id6 = Convert.ToInt32(Console.ReadLine());
                     var staffs = logic.GetAll();
@@ -262,10 +286,10 @@ do {
                             Console.WriteLine($"HospitalShare = {accounts.HospitalShare(staff)}");
                             Console.WriteLine();
                             Console.WriteLine();
-                            Console.WriteLine($"HospitalShare = {accounts.GetTax(staff)}");
+                            Console.WriteLine($"Tax = {accounts.GetTax(staff)}");
                             Console.WriteLine();
                             Console.WriteLine();
-                            Console.WriteLine($"HospitalShare = {accounts.GetStaffIncome(staff)}");
+                            Console.WriteLine($"NetIncome = {accounts.GetStaffIncome(staff)}");
                             Console.ReadLine();
 
                         }
@@ -275,33 +299,254 @@ do {
                         }
                     }
 
+            }
+            else if (str6 == "driver")
+            {
+                Console.WriteLine("Enter the StaffId");
+                int id6 = Convert.ToInt32(Console.ReadLine());
+                var staffs = logic.GetAll();
+                foreach (var v in staffs)
+                {
+                    if (v.Value.StaffId == id6 && v.Value.Staffcategory == str6)
+                    {
+                        Console.WriteLine("Enter the No of working Days");
+                        int no_of_days = Convert.ToInt32(Console.ReadLine());
+
+                        StaffLogicAbstract staff = new DriverLogicEx(id6, no_of_days);
+                        Account accounts = new Account();
+                        Console.Clear();
+                        Console.WriteLine($"{v.Value.StaffId}");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine($"{v.Value.StaffName}");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Income Details");
+                        Console.WriteLine("================================================");
+                        Console.WriteLine($"Gross Income = {accounts.GrossInsome(staff)}");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine($"HospitalShare = {accounts.HospitalShare(staff)}");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine($"HospitalShare = {accounts.GetTax(staff)}");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine($"HospitalShare = {accounts.GetStaffIncome(staff)}");
+                        Console.ReadLine();
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inavlid Id or StaffCategory");
+                    }
                 }
+
+            }
+            break;
+        case 6:
+            Console.WriteLine("Enter the StaffCategory to search");
+            string str2 = Console.ReadLine().ToLower();
+            Console.WriteLine("search by id/name/location");
+            string searchop = Console.ReadLine().ToLower();
+            var staffs1 = logic.GetAll();
+            if (str2 == "doctor" && searchop == "id")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter Id");
+                int id2 = Convert.ToInt32(Console.ReadLine());
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "doctor")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag)
+                {
+                    var s = search.searchbyId(id2);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+
+                    }
+                }
+            }
+            else if (str2 == "doctor" && searchop == "name") {
+                bool flag = false;
+                Console.WriteLine("Enter StaffName");
+                string staff_name = Console.ReadLine().ToLower();
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "doctor")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag)
+                {
+                    var s = search.searchbyname(staff_name);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+
+                    }
+                }
+            }
+            else if (str2 == "doctor" && searchop == "location") {
+                bool flag = false;
+                Console.WriteLine("Enter Location");
+                string loc = Console.ReadLine().ToLower();
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "doctor")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag) {
+                    var s = search.searchbylocation(loc);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+
+                    }
+                }
+            }
+            if (str2 == "nurse" && searchop == "id")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter Id");
+                int id2 = Convert.ToInt32(Console.ReadLine());
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "nurse")
+                    {
+                        flag = true;  
+                    }
+                }
+                if (flag) {
+                    var s = search.searchbyId(id2);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+
+                    }
+                }
+            }
+            else if (str2 == "nurse" && searchop == "name")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter StaffName");
+                string staff_name = Console.ReadLine().ToLower();
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "nurse")
+                    {
+                        flag = true;
+                    }
+                    if (flag) {
+                        var s = search.searchbyname(staff_name);
+                        foreach (var res in s)
+                        {
+                            Console.Write(res + " ");
+
+                        }
+                    }
+                }
+            }
+            else if (str2 == "nurse" && searchop == "location")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter Location");
+                string loc = Console.ReadLine().ToLower();
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "nurse")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag) {
+                    var s = search.searchbylocation(loc);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+
+                    }
+                }
+            }
+            if (str2 == "driver" && searchop == "id")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter Id");
+                int id2 = Convert.ToInt32(Console.ReadLine());
+                foreach (var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "driver")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag) {
+                    var s = search.searchbyId(id2);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+                        ;
+                    }
+                }
+            }
+            else if (str2 == "driver" && searchop == "name")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter StaffName");
+                string staff_name = Console.ReadLine().ToLower();
+                foreach(var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "driver")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag)
+                {
+                    var s = search.searchbyname(staff_name);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+                        ;
+                    }
+                }
+            }
+            else if (str2 == "driver" && searchop == "location")
+            {
+                bool flag = false;
+                Console.WriteLine("Enter Location");
+                string loc = Console.ReadLine().ToLower();
+               foreach(var v in staffs1)
+                {
+                    if (v.Value.Staffcategory == "driver")
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag)
+                {
+                    var s = search.searchbylocation(loc);
+                    foreach (var res in s)
+                    {
+                        Console.Write(res + " ");
+                        
+                    }
+                }
+            }
+
             break;
     }
 } while (want_to_continue == "y" || want_to_continue == "Y");
 
-//Doctor d1 = new Doctor()
-//{
-//    StaffId = 1,
-//    StaffName = "vivek",
-//    Education = "M.B.B.S",
-//    Specilization = "hjds"
-//};
-//ob1.Create(d1.StaffId, d1);
-//IDbOperations<Doctor, int> logic = new DoctorLogic();
-//var a = logic.GetAll();
-//foreach (KeyValuePair<int ,Staff> s  in a)
-//{
-//    var b = (Doctor)s.Value;
-//    Console.WriteLine($"{b.StaffId}  {b.StaffName}  {b.Education} {b.Specilization}");
-    //if (s.Value.StaffId == id && s.Value.StaffDept == str2)
-    //{
-    //    var a = (Doctor)s.Value;
-    //    Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Specilization}  {a.Education}");
-    //    break;
-    //
-    //}
-//}
+
 
 
 

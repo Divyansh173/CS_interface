@@ -21,7 +21,7 @@ namespace CS_Gen_App.Models
 
         public decimal GetBasicPay(StaffLogicAbstract staff)
         { 
-            return staff.CalculateIncome1();
+            return staff.Basic_Pay();
         }
 
         public decimal HospitalShare(StaffLogicAbstract staff) 

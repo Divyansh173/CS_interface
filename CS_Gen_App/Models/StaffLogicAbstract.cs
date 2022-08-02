@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CS_Gen_App.Models
 {
-    public abstract class StaffLogicAbstract 
+    public abstract class StaffLogicAbstract
     {
         protected decimal BasicPay = 0;
 
-        public virtual decimal CalculateIncome1()
+        public virtual decimal Basic_Pay()
         {
             return this.BasicPay = 0;
         }
@@ -21,7 +21,7 @@ namespace CS_Gen_App.Models
         public abstract decimal Tax();
     }
 
-    public class DoctorLogicEx : StaffLogicAbstract//, IAccount<Staff, int>
+    public class DoctorLogicEx : StaffLogicAbstract
     {
         private int PatientsDiagonsed = 0;
         private int OperationsPerDay = 0;
@@ -34,11 +34,7 @@ namespace CS_Gen_App.Models
             OperationsPerDay = operationsPerDay;
         }
 
-        /// <summary>
-        /// OVerrding Method
-        /// </summary>
-        /// <returns></returns>
-        public override decimal CalculateIncome1()
+        public override decimal Basic_Pay()
         {
             int BasicPay = 10000;
             return BasicPay;
@@ -48,7 +44,7 @@ namespace CS_Gen_App.Models
             decimal operationFees = OperationsPerDay * 30 * 10000;
             decimal patientsFessReceived = PatientsDiagonsed * 30 * 500;
             // Call BAse CLass Implementation to ger return value
-            TotalIncome = CalculateIncome1() + operationFees + patientsFessReceived;
+            TotalIncome = Basic_Pay() + operationFees + patientsFessReceived;
             return TotalIncome;
         }
         public override decimal ShareToHospital()
@@ -76,7 +72,7 @@ namespace CS_Gen_App.Models
             InjectionApplied = injectionApplied;
             PatientsMonitored = patientsMonitored;
         }
-        public override decimal CalculateIncome1()
+        public override decimal Basic_Pay()
         {
             int BasicPay = 5000;
             return BasicPay;
@@ -86,13 +82,42 @@ namespace CS_Gen_App.Models
         {
             decimal duetyFees = PatientsMonitored * 250;
             decimal injecionFees = InjectionApplied * 60;
-            GrossIncome = CalculateIncome1() + duetyFees + injecionFees;
+            GrossIncome = Basic_Pay() + duetyFees + injecionFees;
             return GrossIncome;
         }
 
         public override decimal ShareToHospital()
         {
             return GrossIncome * Convert.ToDecimal(0.05);
+        }
+
+        public override decimal Tax()
+        {
+            return GrossIncome * Convert.ToInt32(0.18);
+        }
+    }
+    public class DriverLogicEx : StaffLogicAbstract
+    {
+        private decimal No_Of_Days = 0;
+        private decimal GrossIncome = 0;
+        public override decimal Basic_Pay()
+        {
+            int BasicPay = 8000;
+            return BasicPay;
+        }
+
+        public DriverLogicEx(int id, decimal no_of_days) {
+            No_Of_Days = no_of_days; 
+        }
+        public override decimal CalculateIncome()
+        {
+            GrossIncome = Basic_Pay() + No_Of_Days * 300;
+            return GrossIncome;
+        }
+
+        public override decimal ShareToHospital()
+        {
+            return GrossIncome * Convert.ToInt32(0.01);
         }
 
         public override decimal Tax()

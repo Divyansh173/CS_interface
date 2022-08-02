@@ -25,7 +25,7 @@ namespace CS_Gen_App.Models
             bool flag = false;
             foreach (var v in globalstaffstore.GlobalStaffStore)
             {
-                if (id == v.Key)
+                if (id == v.Key && v.Value.Staffcategory == "doctor")
                 {
                     flag = true;
                     break;
@@ -38,7 +38,7 @@ namespace CS_Gen_App.Models
             }
             else
             {
-                Console.WriteLine("Inavalid Key");
+                Console.WriteLine("Inavalid Key or category");
             }
             return globalstaffstore.GlobalStaffStore;
         }
@@ -104,7 +104,7 @@ namespace CS_Gen_App.Models
             bool flag = false;
             foreach (var v in globalstaffstore.GlobalStaffStore)
             {
-                if (id == v.Key)
+                if (id == v.Key && v.Value.Staffcategory == "nurse")
                 {
                     flag = true;
                     break;
@@ -117,7 +117,7 @@ namespace CS_Gen_App.Models
             }
             else
             {
-                Console.WriteLine("Inavalid Key");
+                Console.WriteLine("Inavalid Key or Staffcategory");
             }
             return globalstaffstore.GlobalStaffStore;
         }
@@ -152,7 +152,10 @@ namespace CS_Gen_App.Models
                         a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
                         a.Staffcategory = Console.ReadLine();
                         a.Experience = Convert.ToInt32(Console.ReadLine());
-                       
+                        a.AssignedRoom = Convert.ToInt32(Console.ReadLine());
+                    }
+                    else {
+                        Console.WriteLine("Inavalid StaffCategory");
                     }
                 }
                 Console.WriteLine("Data updated successfully");
@@ -180,7 +183,7 @@ namespace CS_Gen_App.Models
             bool flag = false;
             foreach (var v in globalstaffstore.GlobalStaffStore)
             {
-                if (id == v.Key)
+                if (id == v.Key && v.Value.Staffcategory == "driver")
                 {
                     flag = true;
                     break;
@@ -218,7 +221,7 @@ namespace CS_Gen_App.Models
             {
                 foreach (KeyValuePair<int, Staff> s in globalstaffstore.GlobalStaffStore)
                 {
-                    if (s.Key == id && s.Value.Staffcategory == "doctor")
+                    if (s.Key == id && s.Value.Staffcategory == "driver")
                     {
                         var a = (Driver)s.Value;
                         a.StaffName = Console.ReadLine();
@@ -228,6 +231,7 @@ namespace CS_Gen_App.Models
                         a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
                         a.Staffcategory = Console.ReadLine();
                         a.VehicleType = Console.ReadLine();
+                        a.Experience = Convert.ToInt32(Console.ReadLine());
                         
                     }
                 }
