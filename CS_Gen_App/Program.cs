@@ -13,6 +13,9 @@ Driver driver = new Driver();
 IDbOperations<Driver, int> logic2 = new DriverLogic();
 
 Hsearch search = new Hsearch();
+EventListner listner = new EventListner(logic);
+EventListner listner1 = new EventListner(logic1);
+EventListner listner2 = new EventListner(logic2);
 
 
 Doctor doc1 = new Doctor() { StaffId = 1, StaffName = "Divyansh", Email = "divyansh@Movie.com", contactno = 998899, Education = "M.B.B.S", ShiftStartTime = 8, ShiftEndTime = 20, DeptName = "Cancer", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
@@ -31,6 +34,8 @@ Doctor doc7 = new Doctor() { StaffId = 7, StaffName = "rohan", Email = "rohan@Mo
 logic.Create(doc7.StaffId, doc7);
 Doctor doc8 = new Doctor() { StaffId = 8, StaffName = "sachin", Email = "sachin@Movie.com", contactno = 991199, Education = "ssc", ShiftStartTime = 8, ShiftEndTime = 20, DeptName = "driving", Staffcategory = "doctor", Location = "pune", Specilization = "cancer" };
 logic.Create(doc8.StaffId, doc8);
+Nurse n1 = new Nurse() { StaffId = 1, StaffName = "Divyansh", Email = "divyansh@Movie.com", contactno = 998899, ShiftStartTime = 8, ShiftEndTime = 20, Staffcategory = "nurse", Location = "pune", Experience = 10, AssignedRoom= 101 };
+logic1.Create(doc1.StaffId, n1);
 
 string want_to_continue = "y";
 do {
@@ -49,7 +54,8 @@ do {
             string str = Console.ReadLine().ToLower();           
             if (str == "doctor")
             {
-                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Education  Speclization");
+               
+                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  DeptName  Education  Speclization");
                 Doctor d1 = new Doctor()
                 {
                     StaffId = Convert.ToInt32(Console.ReadLine()),
@@ -67,7 +73,7 @@ do {
             }
             else if (str == "nurse")
             {
-                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  Education  Speclization");
+                Console.WriteLine("StaffId  StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  Experience  AssignedRoom");
                 Nurse n1 = new Nurse()
                 {
                     StaffId = Convert.ToInt32(Console.ReadLine()),
@@ -109,26 +115,23 @@ do {
        case 2:
             Console.WriteLine("Enter staffcategory to get the details");
             string str1 = Console.ReadLine().ToLower();
-            //Console.WriteLine("Enter the staffId");
-            //int id = Convert.ToInt32(Console.ReadLine());
             var Staffs1 = logic.GetAll();
+            var staffs2 = Staffs1.OrderBy(s => s.Value.StaffName);
 
             if (str1 == "doctor")
             {
-                foreach (KeyValuePair<int, Staff> s in Staffs1)
+                foreach (KeyValuePair<int, Staff> s in staffs2)
                 {
                     if (Convert.ToString(s.Value.GetType()).Contains("Doctor"))
                     {
                         var a = (Doctor)s.Value;
                         Console.WriteLine($"{a.StaffId}  {a.StaffName}  {a.Email}  {a.contactno}  {a.ShiftStartTime}  {a.ShiftEndTime}  {a.Staffcategory}  {a.Location}  {a.DeptName}  {a.Education}  {a.Specilization} ");
-                        
-
                     }
                 }
             }
             else if (str1 == "nurse")
             {
-                foreach (KeyValuePair<int, Staff> s in Staffs1)
+                foreach (KeyValuePair<int, Staff> s in staffs2)
                 {
                     if (Convert.ToString(s.Value.GetType()).Contains("Nurse"))
                     {
@@ -141,7 +144,7 @@ do {
             }
             if (str1 == "driver")
             {
-                foreach (KeyValuePair<int, Staff> s in Staffs1)
+                foreach (KeyValuePair<int, Staff> s in staffs2)
                 {
                     if (Convert.ToString(s.Value.GetType()).Contains("Driver"))
                     {
@@ -161,7 +164,7 @@ do {
                 Doctor d = new Doctor();
                 Console.WriteLine("Enter key to be updated");
                 int id4 = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  DeptNmae  Education  Specilization");
+                Console.WriteLine("StaffName  Email  ContactNo  ShiftStartTime  ShiftEndTime  StaffCategory  Location  DeptNmae  Location  Education  Specilization");
                 logic = new DoctorLogic();
                 logic.Update(id4, d);
             }

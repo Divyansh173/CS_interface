@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Dynamic_Interface", "CS_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Simple_Interface", "CS_Simple_Interface\CS_Simple_Interface.csproj", "{973B5A12-ABC3-4384-A25C-2377A4940657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Gen_App", "CS_Gen_App\CS_Gen_App.csproj", "{E1381192-4E19-4546-878A-F52CA23A21A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_Gen_App", "CS_Gen_App\CS_Gen_App.csproj", "{E1381192-4E19-4546-878A-F52CA23A21A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_Events", "CS_Events\CS_Events.csproj", "{EB06CE8F-C9D2-431A-88F4-8E2D5882AC3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E1381192-4E19-4546-878A-F52CA23A21A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1381192-4E19-4546-878A-F52CA23A21A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1381192-4E19-4546-878A-F52CA23A21A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB06CE8F-C9D2-431A-88F4-8E2D5882AC3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB06CE8F-C9D2-431A-88F4-8E2D5882AC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB06CE8F-C9D2-431A-88F4-8E2D5882AC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB06CE8F-C9D2-431A-88F4-8E2D5882AC3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

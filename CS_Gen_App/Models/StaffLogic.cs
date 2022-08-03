@@ -9,15 +9,23 @@ using CS_Gen_App.Database;
 namespace CS_Gen_App.Models
 {
 
-
+    public delegate void EventHandler();
     public class DoctorLogic : IDbOperations<Doctor, int>
     {
+        public event EventHandler NewRegistration;
+        public event EventHandler DeleteStaff;
+        public event EventHandler UpdateStaff;
+
+        int len = globalstaffstore.GlobalStaffStore.Count;
         void IDbOperations<Doctor, int>.Create(int id, Doctor entity)
         {
             if (globalstaffstore.GlobalStaffStore != null)
             {
                 globalstaffstore.GlobalStaffStore.Add(id, entity);
+                NewRegistration();
             }
+            
+            
         }
 
         Dictionary<int, Staff> IDbOperations<Doctor, int>.Delete(int id)
@@ -34,7 +42,7 @@ namespace CS_Gen_App.Models
             if (flag)
             {
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                Console.WriteLine("Data deleted successfully");
+                DeleteStaff();
             }
             else
             {
@@ -47,6 +55,12 @@ namespace CS_Gen_App.Models
         {
           
             return globalstaffstore.GlobalStaffStore;
+        }
+
+        int IDbOperations<Doctor, int>.length()
+        {
+            int length = globalstaffstore.GlobalStaffStore.Count;
+            return length;
         }
 
         Dictionary<int, Staff> IDbOperations<Doctor, int>.Update(int id, Doctor entity)
@@ -74,11 +88,12 @@ namespace CS_Gen_App.Models
                         a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
                         a.Staffcategory = Console.ReadLine();
                         a.DeptName = Console.ReadLine();
+                        a.Location = Console.ReadLine();
                         a.Education = Console.ReadLine();
                         a.Specilization = Console.ReadLine();
                     }
                 }
-                Console.WriteLine("Data updated successfully");
+                UpdateStaff();
             }
             else
             {
@@ -86,15 +101,21 @@ namespace CS_Gen_App.Models
             }
             return globalstaffstore.GlobalStaffStore;
         }
+
     }
 
     public class NurseLogic : IDbOperations<Nurse, int>
     {
+        public event EventHandler NewRegistration;
+        public event EventHandler DeleteStaff;
+        public event EventHandler UpdateStaff;
+
         void IDbOperations<Nurse, int>.Create(int id, Nurse entity)
         {
             if (globalstaffstore.GlobalStaffStore != null)
             {
                 globalstaffstore.GlobalStaffStore.Add(id, entity);
+                NewRegistration();
             }
         }
 
@@ -113,7 +134,7 @@ namespace CS_Gen_App.Models
             if (flag)
             {
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                Console.WriteLine("Data deleted successfully");
+                DeleteStaff();
             }
             else
             {
@@ -125,6 +146,11 @@ namespace CS_Gen_App.Models
         Dictionary<int, Staff> IDbOperations<Nurse, int>.GetAll()
         {
             return globalstaffstore.GlobalStaffStore;
+        }
+
+        int IDbOperations<Nurse, int>.length()
+        {
+            throw new NotImplementedException();
         }
 
         Dictionary<int, Staff> IDbOperations<Nurse, int>.Update(int id, Nurse entity)
@@ -158,7 +184,7 @@ namespace CS_Gen_App.Models
                         Console.WriteLine("Inavalid StaffCategory");
                     }
                 }
-                Console.WriteLine("Data updated successfully");
+                UpdateStaff();
             }
             else
             {
@@ -170,11 +196,16 @@ namespace CS_Gen_App.Models
 
     public class DriverLogic : IDbOperations<Driver, int>
     {
+        public event EventHandler NewRegistration;
+        public event EventHandler DeleteStaff;
+        public event EventHandler UpdateStaff;
+
         void IDbOperations<Driver, int>.Create(int id, Driver entity)
         {
             if (globalstaffstore.GlobalStaffStore != null)
             {
                 globalstaffstore.GlobalStaffStore.Add(id, entity);
+                NewRegistration();
             }
         }
 
@@ -192,7 +223,7 @@ namespace CS_Gen_App.Models
             if (flag)
             {
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                Console.WriteLine("Data deleted successfully");
+                DeleteStaff();
             }
             else
             {
@@ -204,6 +235,11 @@ namespace CS_Gen_App.Models
         Dictionary<int, Staff> IDbOperations<Driver, int>.GetAll()
         {
             return globalstaffstore.GlobalStaffStore;
+        }
+
+        int IDbOperations<Driver, int>.length()
+        {
+            throw new NotImplementedException();
         }
 
         Dictionary<int, Staff> IDbOperations<Driver, int>.Update(int id, Driver entity)
@@ -235,7 +271,8 @@ namespace CS_Gen_App.Models
                         
                     }
                 }
-                Console.WriteLine("Data updated successfully");
+                UpdateStaff();
+                
             }
             else
             {
@@ -245,4 +282,63 @@ namespace CS_Gen_App.Models
         }
     }
 
+    public class EventListner
+    {
+
+        private IDbOperations<Doctor, int> logic;
+        private IDbOperations<Nurse, int> logic1;
+        private IDbOperations<Driver, int> logic2;
+
+
+        public EventListner(IDbOperations<Doctor, int> logic)
+        {
+            this.logic = logic;
+            logic.NewRegistration += Logic_NewRegistration;
+            logic.DeleteStaff += Logic_Delete;
+            logic.UpdateStaff += Logic_Update;
+            
+        }
+        public EventListner(IDbOperations<Nurse, int> logic1)
+        {
+            this.logic1 = logic1;
+            logic1.NewRegistration += Logic_NewRegistration;
+            logic1.DeleteStaff += Logic_Delete;
+            logic1.UpdateStaff += Logic_Update;
+
+        }
+
+        //public EventListner(IDbOperations<Doctor, int> logic, IDbOperations<Nurse, int> logic1, IDbOperations<Driver, int> logic2) : this(logic)
+        //{
+        //    this.logic1 = logic1;
+        //    this.logic2 = logic2;
+        //}
+        public EventListner(IDbOperations<Driver, int> logic2)
+        {
+            this.logic2 = logic2;
+            logic2.NewRegistration += Logic_NewRegistration;
+            logic2.DeleteStaff += Logic_Delete;
+            logic2.UpdateStaff += Logic_Update;
+
+        }
+        private void Logic_NewRegistration()
+        {
+            Console.WriteLine("Registerd Successfully");
+
+        }
+
+        private void Logic_Delete() 
+        {
+            Console.WriteLine("Deleted successfully");
+        }
+
+        private void Logic_Update() 
+        {
+            Console.WriteLine("Updated successfully");
+        }
+
+
+    }
+
 }
+
+
