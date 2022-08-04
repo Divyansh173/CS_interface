@@ -41,8 +41,8 @@ namespace CS_Gen_App.Models
         }
         public override decimal CalculateIncome()
         {
-            decimal operationFees = OperationsPerDay * 30 * 10000;
-            decimal patientsFessReceived = PatientsDiagonsed * 30 * 500;
+            decimal operationFees = OperationsPerDay * 10 * 500;
+            decimal patientsFessReceived = PatientsDiagonsed * 10 * 500;
             // Call BAse CLass Implementation to ger return value
             TotalIncome = Basic_Pay() + operationFees + patientsFessReceived;
             return TotalIncome;
@@ -93,7 +93,7 @@ namespace CS_Gen_App.Models
 
         public override decimal Tax()
         {
-            return GrossIncome * Convert.ToInt32(0.18);
+            return GrossIncome * Convert.ToDecimal(0.18);
         }
     }
     public class DriverLogicEx : StaffLogicAbstract
@@ -108,21 +108,22 @@ namespace CS_Gen_App.Models
 
         public DriverLogicEx(int id, decimal no_of_days) {
             No_Of_Days = no_of_days; 
+           
         }
         public override decimal CalculateIncome()
         {
-            GrossIncome = Basic_Pay() + No_Of_Days * 300;
+            GrossIncome = Basic_Pay() + No_Of_Days * 100;
             return GrossIncome;
         }
 
         public override decimal ShareToHospital()
         {
-            return GrossIncome * Convert.ToInt32(0.01);
+            return GrossIncome * Convert.ToDecimal(0.10);
         }
 
         public override decimal Tax()
         {
-            return GrossIncome * Convert.ToInt32(0.18);
+            return GrossIncome * Convert.ToDecimal(0.18);
         }
     }
 }

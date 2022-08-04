@@ -16,12 +16,10 @@ namespace CS_Gen_App.Models
     {
         Dictionary<int, Staff> GetAll();
         void Create(int id,TEntity entity);
-        Dictionary<int, Staff> Update(TPk id, TEntity entity);
-        Dictionary<int, Staff> Delete(TPk id);
+        TEntity Update(TPk id, TEntity entity);
+        void Delete(TPk id);
 
         public event EventHandler NewRegistration;
-
-        public event EventHandler DeleteStaff;
         
         public event EventHandler UpdateStaff;
         int length();

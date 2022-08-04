@@ -13,10 +13,8 @@ namespace CS_Gen_App.Models
     public class DoctorLogic : IDbOperations<Doctor, int>
     {
         public event EventHandler NewRegistration;
-        public event EventHandler DeleteStaff;
         public event EventHandler UpdateStaff;
 
-        int len = globalstaffstore.GlobalStaffStore.Count;
         void IDbOperations<Doctor, int>.Create(int id, Doctor entity)
         {
             if (globalstaffstore.GlobalStaffStore != null)
@@ -24,36 +22,23 @@ namespace CS_Gen_App.Models
                 globalstaffstore.GlobalStaffStore.Add(id, entity);
                 NewRegistration();
             }
-            
-            
+
+
         }
 
-        Dictionary<int, Staff> IDbOperations<Doctor, int>.Delete(int id)
+        void IDbOperations<Doctor, int>.Delete(int id)
         {
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
+            if (globalstaffstore.GlobalStaffStore.ContainsKey(id))
             {
-                if (id == v.Key && v.Value.Staffcategory == "doctor")
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
+
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                DeleteStaff();
             }
-            else
-            {
-                Console.WriteLine("Inavalid Key or category");
-            }
-            return globalstaffstore.GlobalStaffStore;
+           
         }
 
         Dictionary<int, Staff> IDbOperations<Doctor, int>.GetAll()
         {
-          
+
             return globalstaffstore.GlobalStaffStore;
         }
 
@@ -63,46 +48,16 @@ namespace CS_Gen_App.Models
             return length;
         }
 
-        Dictionary<int, Staff> IDbOperations<Doctor, int>.Update(int id, Doctor entity)
+        Doctor IDbOperations<Doctor, int>.Update(int id, Doctor entity)
         {
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
-            {
-                if (id == v.Key)
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
-                foreach (KeyValuePair<int, Staff> s in globalstaffstore.GlobalStaffStore)
-                {
-                    if (s.Key == id && s.Value.Staffcategory == "doctor")
-                    {
-                        var a = (Doctor)s.Value;
-                        a.StaffName = Console.ReadLine();
-                        a.Email = Console.ReadLine();
-                        a.contactno = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftStartTime = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
-                        a.Staffcategory = Console.ReadLine();
-                        a.DeptName = Console.ReadLine();
-                        a.Location = Console.ReadLine();
-                        a.Education = Console.ReadLine();
-                        a.Specilization = Console.ReadLine();
-                    }
-                }
-                UpdateStaff();
-            }
-            else
-            {
-                Console.WriteLine("Record Not Found");
-            }
-            return globalstaffstore.GlobalStaffStore;
-        }
 
+            globalstaffstore.GlobalStaffStore[id] = entity;
+            UpdateStaff();
+            return entity;
+        }   
     }
+
+
 
     public class NurseLogic : IDbOperations<Nurse, int>
     {
@@ -119,28 +74,14 @@ namespace CS_Gen_App.Models
             }
         }
 
-        Dictionary<int, Staff> IDbOperations<Nurse, int>.Delete(int id)
+        void IDbOperations<Nurse, int>.Delete(int id)
         {
+            if (globalstaffstore.GlobalStaffStore.ContainsKey(id))
+            {
 
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
-            {
-                if (id == v.Key && v.Value.Staffcategory == "nurse")
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                DeleteStaff();
             }
-            else
-            {
-                Console.WriteLine("Inavalid Key or Staffcategory");
-            }
-            return globalstaffstore.GlobalStaffStore;
+
         }
 
         Dictionary<int, Staff> IDbOperations<Nurse, int>.GetAll()
@@ -153,44 +94,13 @@ namespace CS_Gen_App.Models
             throw new NotImplementedException();
         }
 
-        Dictionary<int, Staff> IDbOperations<Nurse, int>.Update(int id, Nurse entity)
+        Nurse IDbOperations<Nurse, int>.Update(int id, Nurse entity)
+
         {
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
-            {
-                if (id == v.Key)
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
-                foreach (KeyValuePair<int, Staff> s in globalstaffstore.GlobalStaffStore)
-                {
-                    if (s.Key == id && s.Value.Staffcategory == "nurse")
-                    {
-                        var a = (Nurse)s.Value;
-                        a.StaffName = Console.ReadLine();
-                        a.Email = Console.ReadLine();
-                        a.contactno = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftStartTime = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
-                        a.Staffcategory = Console.ReadLine();
-                        a.Experience = Convert.ToInt32(Console.ReadLine());
-                        a.AssignedRoom = Convert.ToInt32(Console.ReadLine());
-                    }
-                    else {
-                        Console.WriteLine("Inavalid StaffCategory");
-                    }
-                }
-                UpdateStaff();
-            }
-            else
-            {
-                Console.WriteLine("Record Not Found");
-            }
-            return globalstaffstore.GlobalStaffStore;
+            globalstaffstore.GlobalStaffStore[id] = entity;
+            UpdateStaff();
+            return entity;
+           
         }
     }
 
@@ -209,27 +119,13 @@ namespace CS_Gen_App.Models
             }
         }
 
-        Dictionary<int, Staff> IDbOperations<Driver, int>.Delete(int id)
+        void IDbOperations<Driver, int>.Delete(int id)
         {
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
+            if (globalstaffstore.GlobalStaffStore.ContainsKey(id))
             {
-                if (id == v.Key && v.Value.Staffcategory == "driver")
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
+
                 globalstaffstore.GlobalStaffStore.Remove(id);
-                DeleteStaff();
             }
-            else
-            {
-                Console.WriteLine("Inavalid Key");
-            }
-            return globalstaffstore.GlobalStaffStore;
         }
 
         Dictionary<int, Staff> IDbOperations<Driver, int>.GetAll()
@@ -242,43 +138,12 @@ namespace CS_Gen_App.Models
             throw new NotImplementedException();
         }
 
-        Dictionary<int, Staff> IDbOperations<Driver, int>.Update(int id, Driver entity)
+        Driver IDbOperations<Driver, int>.Update(int id, Driver entity)
         {
-            bool flag = false;
-            foreach (var v in globalstaffstore.GlobalStaffStore)
-            {
-                if (id == v.Key)
-                {
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
-                foreach (KeyValuePair<int, Staff> s in globalstaffstore.GlobalStaffStore)
-                {
-                    if (s.Key == id && s.Value.Staffcategory == "driver")
-                    {
-                        var a = (Driver)s.Value;
-                        a.StaffName = Console.ReadLine();
-                        a.Email = Console.ReadLine();
-                        a.contactno = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftStartTime = Convert.ToInt32(Console.ReadLine());
-                        a.ShiftEndTime = Convert.ToInt32(Console.ReadLine());
-                        a.Staffcategory = Console.ReadLine();
-                        a.VehicleType = Console.ReadLine();
-                        a.Experience = Convert.ToInt32(Console.ReadLine());
-                        
-                    }
-                }
-                UpdateStaff();
-                
-            }
-            else
-            {
-                Console.WriteLine("Record Not Found");
-            }
-            return globalstaffstore.GlobalStaffStore;
+            globalstaffstore.GlobalStaffStore[id] = entity;
+            UpdateStaff();
+            return entity;
+
         }
     }
 
@@ -294,15 +159,14 @@ namespace CS_Gen_App.Models
         {
             this.logic = logic;
             logic.NewRegistration += Logic_NewRegistration;
-            logic.DeleteStaff += Logic_Delete;
             logic.UpdateStaff += Logic_Update;
-            
+
         }
+
         public EventListner(IDbOperations<Nurse, int> logic1)
         {
             this.logic1 = logic1;
             logic1.NewRegistration += Logic_NewRegistration;
-            logic1.DeleteStaff += Logic_Delete;
             logic1.UpdateStaff += Logic_Update;
 
         }
@@ -316,7 +180,6 @@ namespace CS_Gen_App.Models
         {
             this.logic2 = logic2;
             logic2.NewRegistration += Logic_NewRegistration;
-            logic2.DeleteStaff += Logic_Delete;
             logic2.UpdateStaff += Logic_Update;
 
         }
@@ -326,12 +189,7 @@ namespace CS_Gen_App.Models
 
         }
 
-        private void Logic_Delete() 
-        {
-            Console.WriteLine("Deleted successfully");
-        }
-
-        private void Logic_Update() 
+        private void Logic_Update()
         {
             Console.WriteLine("Updated successfully");
         }
@@ -339,6 +197,7 @@ namespace CS_Gen_App.Models
 
     }
 
+
+
+
 }
-
-
