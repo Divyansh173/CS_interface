@@ -319,6 +319,10 @@ do {
                 string[] data = new string[] { $"{a}\n\n{b}\n\nIncome Details\nGross Income \t : {c}{dg.digit_word(Convert.ToInt32(c))}\n\nHospitalShare \t : {d}\t{dg.digit_word(Convert.ToInt32(d))}\n\n", $"tax \t\t : {e}\t\t{dg.digit_word(Convert.ToInt32(e))}\n", $"NetIncome \t : {f}\t{dg.digit_word(Convert.ToInt32(f))}" };
 
                 operation.WriteFile(directory, fileName, data);
+                Console.Clear();
+                Console.WriteLine(operation.ReadFile(directory,fileName));
+                Console.ReadLine();
+
                 
             }
             else if (str6 == "nurse")

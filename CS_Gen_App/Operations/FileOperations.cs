@@ -57,6 +57,23 @@ namespace CS_Gen_App.Operations
                 throw ex;
             }
         }
+        public string ReadFile(string directory, string fileName)
+        {
+            try
+            {
+                string contents = string.Empty;
+                if (fileName == string.Empty)
+                {
+                    throw new Exception("File Name Cannot be Empty");
+                }
+                contents = File.ReadAllText($"{directory}/{fileName}");
+                return contents;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }
