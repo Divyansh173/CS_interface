@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CS_Inheritence.Models;
-namespace CS_Inheritence.Logic
+using CS_FIleStreamApp.Models;
+namespace CS_FIleStreamApp.Logic
 {
     public class DoctorLogic : IDisposable
     {
@@ -33,34 +33,11 @@ namespace CS_Inheritence.Logic
             }
         }
 
-        public void ReadFile()
-        {
-            string str = string.Empty;
-            try
-            {
-                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                StreamReader sr = new StreamReader(fs);
-                //str = sr.ReadToEnd();
-                string line = string.Empty;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line.Contains("doctor"))
-                        {
-                            Console.Write(line);
-                        }
-                    }
-                sr.Close();
-                sr.Dispose();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
 
         public void Dispose()
         {
-            fs.Dispose();
+            //fs.Dispose();
             GC.SuppressFinalize(this);
         }
     }   

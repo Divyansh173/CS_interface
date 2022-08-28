@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace CS_Inheritence.Models
+namespace CS_FIleStreamApp.Models
 {
     [Serializable]
     public class Staff

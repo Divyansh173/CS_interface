@@ -21,18 +21,64 @@
 //FileName FileSize DateCreated DateMOdified
 //Write a C# COde that will copy all files from SourceDIrectory to TargetDictory
 
-using CS_Inheritence.Logic;
-using CS_Inheritence.Models;
+using CS_FIleStreamApp.Logic;
+using CS_FIleStreamApp.Models;
+using CS_FIleStreamApp.Search;
 
-DoctorLogic dl = new DoctorLogic();
+DoctorLogic dlogic = new DoctorLogic();
 Doctor doctor = new Doctor();
-NurseLogic nl= new NurseLogic();
+NurseLogic nurseLogic= new NurseLogic();
 Nurse nurse = new Nurse();
-TechnicianLogic tl = new TechnicianLogic();
+TechnicianLogic technicianLogic = new TechnicianLogic();
 Technician technician = new Technician();
 
+search search = new search();
 try
 {
+    //Doctor doc1 = new Doctor() { StaffId = 1, StaffName = "divyansh", staff_category="doctor", Email = "divyansh@Movie.com", ContactNo = 998899, Education = "M.B.B.S", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 6456, MaxPatientsPerDay = 10 };
+    //dlogic.WriteFile(doc1);
+    //Doctor doc2 = new Doctor() { StaffId = 2, StaffName = "omkar", staff_category = "doctor", Email = "omkar@Movie.com", ContactNo = 997799, Education = "B.A.M.S", ShiftStartTime = 7, ShiftEndTime = 19, Specialization = "Heart", Fees = 6000, MaxPatientsPerDay = 8 };
+    //dlogic.WriteFile(doc2);
+    //Doctor doc3 = new Doctor() { StaffId = 3, StaffName = "rahul", staff_category = "doctor", Email = "rahul@Movie.com", ContactNo = 996699, Education = "B.A.M.S", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Heart", Fees = 7000, MaxPatientsPerDay = 6 };
+    //dlogic.WriteFile(doc3);
+    //Doctor doc4 = new Doctor() { StaffId = 4, StaffName = "vivek", staff_category = "doctor", Email = "vivek@Movie.com", ContactNo = 995599, Education = "B.H.M.S", ShiftStartTime = 9, ShiftEndTime = 21, Specialization = "Cancer", Fees = 8000, MaxPatientsPerDay = 16 };
+    //dlogic.WriteFile(doc4);
+    //Doctor doc5 = new Doctor() { StaffId = 5, StaffName = "omkar", staff_category = "doctor", Email = "omkar@Movie.com", ContactNo = 994499, Education = "M.B.B.S", ShiftStartTime = 10, ShiftEndTime = 22, Specialization = "eye", Fees = 8000, MaxPatientsPerDay = 17 };
+    //dlogic.WriteFile(doc5);
+    //Doctor doc6 = new Doctor() { StaffId = 6, StaffName = "anurag", staff_category = "doctor", Email = "anurag@Movie.com", ContactNo = 993399, Education = "M.B.B.S", ShiftStartTime = 9, ShiftEndTime = 21, Specialization = "Cancer", Fees = 6556, MaxPatientsPerDay = 18 };
+    //dlogic.WriteFile(doc6);
+    //Doctor doc7 = new Doctor() { StaffId = 7, StaffName = "rohan", staff_category = "doctor", Email = "rohan@Movie.com", ContactNo = 992299, Education = "B.H.M.S", ShiftStartTime = 10, ShiftEndTime = 22, Specialization = "eye", Fees = 9000, MaxPatientsPerDay = 19 };
+    //dlogic.WriteFile(doc7);
+    //Doctor doc8 = new Doctor() { StaffId = 8, StaffName = "sachin", staff_category = "doctor", Email = "sachin@Movie.com", ContactNo = 991199, Education = "ssc", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "driving", Fees = 8000, MaxPatientsPerDay = 9 };
+    //dlogic.WriteFile(doc8);
+    //Nurse n1 = new Nurse() { StaffId = 1, StaffName = "sakshi", staff_category = "nurse", Email = "sakshi@Movie.com", ContactNo = 998899, Education = "bsc nursing", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 6456, patientsattended = 10 };
+    //nurseLogic.WriteFile(n1);
+    //Nurse n2 = new Nurse() { StaffId = 2, StaffName = "sonali", staff_category = "nurse", Email = "sonalih@Movie.com", ContactNo = 998899, Education = "anm", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 6456, patientsattended = 10 };
+    //nurseLogic.WriteFile(n2);
+    //Nurse n3 = new Nurse() { StaffId = 3, StaffName = "indumati", staff_category = "nurse", Email = "indumati@Movie.com", ContactNo = 998899, Education = "anm", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 6000, patientsattended = 10 };
+    //nurseLogic.WriteFile(n3);
+    //Nurse n4 = new Nurse() { StaffId = 4, StaffName = "kavita", staff_category = "nurse", Email = "kavita@Movie.com", ContactNo = 998899, Education = "bsc nursing", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 6236, patientsattended = 10 };
+    //nurseLogic.WriteFile(n4);
+    //Nurse n5 = new Nurse() { StaffId = 5, StaffName = "rashika", staff_category = "nurse", Email = "rashika@Movie.com", ContactNo = 998899, Education = "anm", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 7896, patientsattended = 10 };
+    //nurseLogic.WriteFile(n5);
+    //Nurse n6 = new Nurse() { StaffId = 6, StaffName = "katrina", staff_category = "nurse", Email = "katrina@Movie.com", ContactNo = 998899, Education = "bsc nursing", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 7000, patientsattended = 10 };
+    //nurseLogic.WriteFile(n6);
+    //Nurse n7 = new Nurse() { StaffId = 7, StaffName = "kareena", staff_category = "nurse", Email = "kareena@Movie.com", ContactNo = 998899, Education = "anm", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "Cancer", Fees = 8000, patientsattended = 10 };
+    //nurseLogic.WriteFile(n7);
+    //Technician tech1 = new Technician() { StaffId = 1, StaffName = "mihir", staff_category = "technician", Email = "mihir@Movie.com", ContactNo = 96799, Education = "hsc", ShiftStartTime = 8, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech1);
+    //Technician tech2 = new Technician() { StaffId = 2, StaffName = "subhankar", staff_category = "technician", Email = "subhankar@Movie.com", ContactNo = 12354, Education = "hsc", ShiftStartTime = 10, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech2);
+    //Technician tech3 = new Technician() { StaffId = 3, StaffName = "pavan", staff_category = "technician", Email = "pavan@Movie.com", ContactNo = 672347, Education = "ssc", ShiftStartTime = 7, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech3);
+    //Technician tech4 = new Technician() { StaffId = 4, StaffName = "ram", staff_category = "technician", Email = "ram@Movie.com", ContactNo = 34437, Education = "ssc", ShiftStartTime = 18, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech4);
+    //Technician tech5 = new Technician() { StaffId = 5, StaffName = "laxman", staff_category = "technician", Email = "laxamn@Movie.com", ContactNo = 28934, Education = "hsc", ShiftStartTime = 20, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech5);
+    //Technician tech6 = new Technician() { StaffId = 6, StaffName = "manav", staff_category = "technician", Email = "manav@Movie.com", ContactNo = 28943, Education = "ssc", ShiftStartTime = 9, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech6);
+    //Technician tech7 = new Technician() { StaffId = 7, StaffName = "hemant", staff_category = "technician", Email = "hemant@Movie.com", ContactNo = 97329, Education = "hsc", ShiftStartTime = 7, ShiftEndTime = 20, Specialization = "driving", Expertise = "ambulance" };
+    //technicianLogic.WriteFile(tech7);
     static Doctor add()
     {
         Doctor doc = new Doctor();
@@ -129,11 +175,58 @@ try
         return tech;
     }
 
-    //string want_to_continue = "y";
-    //do
-    //{
+    string want_to_continue = "y";
+    do
+    {
+        Console.WriteLine("1.Add Details");
+        Console.WriteLine("2.get details by staff_cat");
+        Console.WriteLine("3.get details by Id");
+        Console.WriteLine("get details by count");
+        Console.WriteLine("update staff by Id");
+        Console.WriteLine("delete staff by Id");
 
-    //} while (want_to_continue == "y" || want_to_continue == "Y");
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        switch (choice) 
+        {
+            case 1:
+                string staff_cat = Console.ReadLine().ToLower();
+                if (staff_cat == "doctor")
+                {
+                    var a = add();
+                    dlogic.WriteFile(a);
+                }
+                else if (staff_cat == "nurse")
+                {
+                    var a = add1();
+                    nurseLogic.WriteFile(a);
+                }
+                else if (staff_cat == "technician") 
+                {    
+                    var a = add2();
+                    technicianLogic.WriteFile(a);
+                }
+                break;
+
+           case 2:
+                search.searchbycat();
+                break;
+
+           case 3:
+                search.searchbyId();
+                break;
+
+           case 4:
+                search.getdetailsbycount();
+                break;
+
+        }
+
+        Console.WriteLine("Press y to continue");
+        want_to_continue = Console.ReadLine();
+
+
+    } while (want_to_continue == "y" || want_to_continue == "Y");
     //var a = add();
     //dl.WriteFile(a);
 
@@ -144,7 +237,8 @@ try
     //tl.WriteFile(c);
 
     //dl.ReadFile();
-
+    //search.searchbycat();
+    //search.searchbyId(); 
 
 
 }
@@ -154,6 +248,10 @@ catch (Exception ex)
 }
 finally
 {
-    dl.Dispose();
+    dlogic.Dispose();
+    nurseLogic.Dispose();
+    technicianLogic.Dispose();
 }
+
+Console.ReadLine();
 

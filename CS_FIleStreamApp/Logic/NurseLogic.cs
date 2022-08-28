@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CS_Inheritence.Models;
+using CS_FIleStreamApp.Models;
 
 
-namespace CS_Inheritence.Logic
+namespace CS_FIleStreamApp.Logic
 {
     public class NurseLogic : IDisposable
     {
@@ -37,7 +37,7 @@ namespace CS_Inheritence.Logic
 
         public void Dispose()
         {
-            fs.Dispose();
+            //fs.Dispose();
             GC.SuppressFinalize(this);
         }
     }

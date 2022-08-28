@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CS_Inheritence.Models
+namespace CS_FIleStreamApp.Models
 {
     public class Technician:Staff
     {
