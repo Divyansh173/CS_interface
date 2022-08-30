@@ -15,7 +15,7 @@ namespace CS_FIleStreamApp.Logic
         {
             filePath = @"C:\Files\data.txt";
         }
-        List<Technician> Technicians = new List<Technician>();
+        //List<Technician> Technicians = new List<Technician>();
 
         public void WriteFile(Technician technician)
         {
@@ -36,7 +36,7 @@ namespace CS_FIleStreamApp.Logic
 
         public void Dispose()
         {
-            //fs.Dispose();
+            fs.Dispose();
             GC.SuppressFinalize(this);
         }
 

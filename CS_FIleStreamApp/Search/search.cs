@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using Newtonsoft.Json;
+using CS_FIleStreamApp.Logic;
+using CS_FIleStreamApp.Models;
 
 namespace CS_FIleStreamApp.Search
 {
@@ -17,7 +21,7 @@ namespace CS_FIleStreamApp.Search
         public void searchbycat()
         {
             string str = string.Empty;
-            string input = Console.ReadLine().ToLower();
+            //string input = Console.ReadLine().ToLower();
             try
             {
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -26,10 +30,11 @@ namespace CS_FIleStreamApp.Search
                 string line = string.Empty;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (line.Contains(input))
+                    var a = JsonConvert.DeserializeObject<Staff>(line);
+                    if (a.staff_category == "doctor")
                     {
-                        Console.Write(line);
-                        Console.WriteLine();
+                        Console.Write(a.StaffName);
+                        //Console.WriteLine();
                     }
                     
                 }
@@ -54,7 +59,7 @@ namespace CS_FIleStreamApp.Search
                 string line = string.Empty;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (line.Contains($"Id: {input}"))
+                    if (line.Contains($"Id: {input} "))
                     {
                         Console.Write(line);
                         Console.WriteLine();

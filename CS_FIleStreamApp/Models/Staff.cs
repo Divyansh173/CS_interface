@@ -15,7 +15,7 @@ namespace CS_FIleStreamApp.Models
         {
             //Console.WriteLine("CTOR for Staff");
         }
-        private int _StaffId { get; set; }
+        public static int _StaffId { get; set; }
 
         public int StaffId
         {
@@ -48,7 +48,7 @@ namespace CS_FIleStreamApp.Models
         public string Email { get; set; } = String.Empty;
         public int ContactNo { get; set; }
 
-        public string staff_category;
+        public string staff_category { get; set; }
         public string? Education { get; set; }
 
         private DateTime _dob { get; set; }
