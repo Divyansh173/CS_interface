@@ -36,7 +36,7 @@ namespace CS_FIleStreamApp.Logic
 
         public void Dispose()
         {
-            fs.Dispose();
+            //fs.Dispose();
             GC.SuppressFinalize(this);
         }
 

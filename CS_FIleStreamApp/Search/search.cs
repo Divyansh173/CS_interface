@@ -20,8 +20,8 @@ namespace CS_FIleStreamApp.Search
         }
         public void searchbycat()
         {
-            string str = string.Empty;
-            //string input = Console.ReadLine().ToLower();
+            //string str = string.Empty;
+            string input = Console.ReadLine().ToLower();
             try
             {
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -31,10 +31,10 @@ namespace CS_FIleStreamApp.Search
                 while ((line = sr.ReadLine()) != null)
                 {
                     var a = JsonConvert.DeserializeObject<Staff>(line);
-                    if (a.staff_category == "doctor")
+                    if (a.staff_category == input)
                     {
                         Console.Write(a.StaffName);
-                        //Console.WriteLine();
+                        Console.WriteLine();
                     }
                     
                 }
@@ -48,20 +48,19 @@ namespace CS_FIleStreamApp.Search
         }
 
         public void searchbyId()
-        {
-            string str = string.Empty;
-            string input = Console.ReadLine().ToLower();
+        {   
             try
             {
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
-                //str = sr.ReadToEnd();
                 string line = string.Empty;
+                int input = Convert.ToInt32(Console.ReadLine());
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (line.Contains($"Id: {input} "))
+                    var data = JsonConvert.DeserializeObject<Staff>(line);
+                    if (data.StaffId == input)
                     {
-                        Console.Write(line);
+                        Console.Write($"{data.StaffName}  {data.Email}");
                         Console.WriteLine();
                     }
 

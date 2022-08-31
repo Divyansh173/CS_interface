@@ -196,6 +196,7 @@ try
                 if (staff_cat == "doctor")
                 {
                     var a = add();
+                   
                     dlogic.WriteFile(a);
                 }
                 else if (staff_cat == "nurse")
@@ -223,7 +224,14 @@ try
                 break;
 
            case 5:
-                dlogic.updatebyid();
+                Console.WriteLine("Enter Id to be updated");
+                int id = Convert.ToInt32(Console.ReadLine());
+                dlogic.updatebyid(id);
+                break;
+
+            case 6:
+                DoctorLogic dl = new DoctorLogic();
+                dl.delete();
                 break;
 
 
@@ -235,19 +243,6 @@ try
 
 
     } while (want_to_continue == "y" || want_to_continue == "Y");
-    //var a = add();
-    //dl.WriteFile(a);
-
-    //var b = add1();
-    //nl.WriteFile(b);
-
-    //var c = add2();
-    //tl.WriteFile(c);
-
-    //dl.ReadFile();
-    //search.searchbycat();
-    //search.searchbyId(); 
-
 
 }
 catch (Exception ex)
