@@ -22,27 +22,28 @@ namespace CS_FIleStreamApp.Models
             get { return _StaffId; }
             set
             {
-                bool staff_id = true;
-                while (staff_id)
-                {
-                    if (value <= 0)
-                    {
-                        Console.WriteLine("StaffId can not be less than or equal to zero");
-                        value = Convert.ToInt32(Console.ReadLine());
-                        if (value > 0)
-                        {
-                            _StaffId = value;
-                            staff_id = false;
-                        }
+                //bool staff_id = true;
+                //while (staff_id)
+                //{
+                //    if (value <= 0)
+                //    {
+                //        Console.WriteLine("StaffId can not be less than or equal to zero");
+                //        value = Convert.ToInt32(Console.ReadLine());
+                //        if (value > 0)
+                //        {
+                //            _StaffId = value;
+                //            staff_id = false;
+                //        }
 
-                    }
-                    else
-                    {
-                        _StaffId = value;
-                        staff_id = false;
-                    }
+                //    }
+                //    else
+                //    {
+                //        _StaffId = value;
+                //        staff_id = false;
+                //    }
+                _StaffId=   value;
                 }
-            }
+            
         }
         public string StaffName { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;

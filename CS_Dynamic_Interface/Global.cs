@@ -1,7 +1,10 @@
 ﻿global using CS_Dynamic_Interface.Models;
 namespace CS_Dynamic_Interface
 {
-    internal class Global
+    public class Global
     {
+        public void add() {
+            Console.WriteLine("hello");
+        }
     }
 }

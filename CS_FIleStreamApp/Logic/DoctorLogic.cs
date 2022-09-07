@@ -16,22 +16,19 @@ namespace CS_FIleStreamApp.Logic
         {
             filePath = @"C:\Files\data.txt";
         }
-       //List<Doctor> Doctors = new List<Doctor>();
-
+   
         public void WriteFile(Doctor doctor)
         {
             try
             {
-                //Doctors.Add(doctor);
                 fs = new FileStream(filePath,FileMode.Append);
                 StreamWriter sw = new StreamWriter(fs);
-                //sw.Write($"Id: {doctor.StaffId} Name: {doctor.StaffName} staffcat: {doctor.staff_category} Email: {doctor.Email} ShiftStartTime: {doctor.ShiftStartTime} ShiftEndTime: {doctor.ShiftEndTime} Specialization: {doctor.Specialization} Fees: {doctor.Fees} Education: {doctor.Education} ConatctNo: {doctor.ContactNo} Dob: {doctor.Dob}") ;
                 var doctorsJSONData = JsonSerializer.Serialize(doctor);
-                //Console.WriteLine($"Data \n {doctorsJSONData}");
                 sw.Write(doctorsJSONData);
                 sw.Write(Environment.NewLine);
                 sw.Close();
                 sw.Dispose();
+                fs.Dispose();
             }
             catch (Exception ex)
             {
@@ -41,96 +38,75 @@ namespace CS_FIleStreamApp.Logic
 
         public void updatebyid(int id)
         {
-            fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
+            fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
-            //StreamWriter sw = new StreamWriter(fs);
-            List<Staff> li = new List<Staff>();
+            List<String> li = new List<String>();
             string line = string.Empty;
-            while ((line = sr.ReadLine()) != null) 
-            {
-                
-                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Staff>(line);
-                if (data.StaffId != id)
-                {     
-                    li.Add(data);
-                }
-                else 
-                {
-                    Doctor doctor = new Doctor();
-                    Console.WriteLine("Enter staff Id");
-                    doctor.StaffId = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("staff category");
-                    doctor.staff_category = Console.ReadLine();
-                    Console.WriteLine("Enter Email");
-                    doctor.Email = Console.ReadLine();
-                    Console.WriteLine("Enter Conatct no");
-                    doctor.ContactNo = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Enter Fees");
-                    doctor.Fees = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Enter Basic Pay");
-                    doctor.BasicPay = Convert.ToInt32(Console.ReadLine());
-                   
-                    li.Add(doctor);
-                    
-                }
-            }
-            sr.Close();
-            sr.Dispose(); 
-            File.Delete(filePath);
-            fs = new FileStream(filePath, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs);
-            foreach (var data in li)
-            {
-                var data1 = JsonSerializer.Serialize(data);
-                sw.Write(data1);
-                sw.Write(Environment.NewLine);
-            }
-            //sr.Close();
-            //sr.Dispose();
-            sw.Close();
-            sw.Dispose();
-
-        }
-
-        public void delete() 
-        {
-            fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
-            StreamReader sr = new StreamReader(fs);
-
-            Console.WriteLine("Enter id to be deleted");
-            int id = Convert.ToInt32(Console.ReadLine());
-            string line = string.Empty;
-
-            List<Staff> li = new List<Staff>();
-            while ((line = sr.ReadLine()) != null) 
-            {
+            while ((line = sr.ReadLine()) != null) {
                 var data = JsonSerializer.Deserialize<Staff>(line);
-                if (data.StaffId != id) 
+                if (data.StaffId != id)
                 {
-                    li.Add(data);
+                    li.Add(line);
+                }
+                else {
+                    Doctor doc = new Doctor();
+                    //Console.WriteLine("Enter StaffId");
+                    doc.StaffId = id;
+                    Console.WriteLine("Enter StaffName");
+                    doc.StaffName = Console.ReadLine();
+                    Console.WriteLine("Enter Email");
+                    doc.Email = Console.ReadLine();
+                    Console.WriteLine("Enter Contactno.");
+                    doc.ContactNo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter dob");
+                    doc.Dob = DateTime.Parse(Console.ReadLine());
+                    Console.WriteLine("Enetr Staff Category");
+                    doc.staff_category = Console.ReadLine();
+                    Console.WriteLine("Enter Education");
+                    doc.Education = Console.ReadLine();
+                    Console.WriteLine("Enter ShiftStartTime");
+                    doc.ShiftStartTime = Convert.ToInt32(Console.ReadLine());
+                    doc.ShiftEndTime = doc.ShiftEndTime1(doc.ShiftStartTime);
+                    Console.WriteLine("Enter Specialization");
+                    doc.Specialization = Console.ReadLine();
+                    Console.WriteLine("Enter Fees");
+                    doc.Fees = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter MaxPatientsPerDay");
+                    doc.MaxPatientsPerDay = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter basic pay");
+                    doc.BasicPay = Convert.ToInt32(Console.ReadLine());
+
+                    var data1 = JsonSerializer.Serialize<Doctor>(doc);
+
+                    li.Add(data1);
                 }
             }
+
             sr.Close();
             sr.Dispose();
             File.Delete(filePath);
             fs = new FileStream(filePath, FileMode.Create);
+            fs.Close();
+            fs.Dispose();
+            fs = new FileStream(filePath, FileMode.Open, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
-
-            foreach (var v in li) 
+            foreach (var item in li)
             {
-                var data = JsonSerializer.Serialize(v);
-                sw.Write(data);
-                sw.Write(Environment.NewLine);
+                
+                sw.WriteLine(item);
+                
             }
             sw.Close();
             sw.Dispose();
+            fs.Close();
+            fs.Dispose();
+            
+
         }
-
-
 
         public void Dispose()
         {
-            //fs.Dispose();
+            fs.Dispose();
             GC.SuppressFinalize(this);
         }
     }   
