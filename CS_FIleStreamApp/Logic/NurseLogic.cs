@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace CS_FIleStreamApp.Logic
 {
     public class NurseLogic : IDisposable
-    {
+    {     
         FileStream fs;
         string filePath = string.Empty;
         public NurseLogic()

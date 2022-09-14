@@ -9,6 +9,7 @@ namespace CS_Simple_Interface.Models
     public interface ISimpleMath
     {
         int Add(int x, int y);
+
         int Sub(int x, int y);
     }
 
