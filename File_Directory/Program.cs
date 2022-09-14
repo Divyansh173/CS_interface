@@ -11,8 +11,7 @@ foreach (var v in files)
     Console.Write($" File Size : {f1.Length}");
     Console.WriteLine();
 }
-cododw
-
+Console.WriteLine("Divyansh");
 
 
 
