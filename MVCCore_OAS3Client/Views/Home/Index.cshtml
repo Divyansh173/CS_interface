@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ClientNSName.Category>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+        </tr>
+    </thead>
+</table>
+
+
+<form  asp-controller="Home" asp-action="GetProducts" method="post">
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <div class="form-group">
+                <input asp-for="@item.CategoryId" type="radio" name="id" value="@item.CategoryId" />@item.CategoryName
+                <br/>
+            </div>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td><input type="submit" value="Submit Form" /></td>
+    </tr>
+</form>
+

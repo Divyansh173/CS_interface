@@ -1,17 +1,42 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.IO;
-string[] files = Directory.GetFiles(@"C:\HTML", "*.*", SearchOption.AllDirectories);
-foreach (var v in files)
-{
-    FileInfo f1 = new FileInfo(v);
+                                        //Read All Files
 
-    Console.Write($"Name: {f1.Name}");
-    Console.Write($" Creation Time : {f1.CreationTime}");
-    Console.Write($" Last Access Time : {f1.LastAccessTime}");
-    Console.Write($" File Size : {f1.Length}");
-    Console.WriteLine();
+//ReadAllFiles();
+
+static void ReadAllFiles()
+{
+    string[] files = Directory.GetFiles(@"C:\HTML", "*.*", SearchOption.AllDirectories);
+            Console.WriteLine("Name             CreationTime            LastAccessTime            Length");
+    foreach (var v in files)
+    {
+        FileInfo f1 = new FileInfo(v);
+        Console.WriteLine($"{f1.Name}       {f1.CreationTime}       {f1.LastAccessTime}     {f1.Length}");
+        Console.WriteLine();
+    }
 }
-Console.WriteLine("Divyansh");
+
+
+
+
+                                            // Copy All Files
+//CopyFiles(@"C:\HTML", @"C:\HTML1");
+static void CopyFiles(string source, string destination) 
+{
+    string[] directories = Directory.GetDirectories(source,"*",SearchOption.AllDirectories);
+    foreach (string directory in directories) 
+    {
+        Directory.CreateDirectory(directory.Replace(source,destination));
+    }
+    string[] files = Directory.GetFiles(source,"*.*",SearchOption.AllDirectories);
+    foreach (string file in files) 
+    {
+        File.Copy(file, file.Replace(source, destination), true);    
+    }
+
+}
+
+
 
 
 

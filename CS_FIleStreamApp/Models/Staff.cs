@@ -21,29 +21,7 @@ namespace CS_FIleStreamApp.Models
         {
             get { return _StaffId; }
             set
-            {
-                //bool staff_id = true;
-                //while (staff_id)
-                //{
-                //    if (value <= 0)
-                //    {
-                //        Console.WriteLine("StaffId can not be less than or equal to zero");
-                //        value = Convert.ToInt32(Console.ReadLine());
-                //        if (value > 0)
-                //        {
-                //            _StaffId = value;
-                //            staff_id = false;
-                //        }
-
-                //    }
-                //    else
-                //    {
-                //        _StaffId = value;
-                //        staff_id = false;
-                //    }
-                _StaffId=   value;
-                }
-            
+            { _StaffId=   value;}   
         }
         public string StaffName { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;
@@ -90,22 +68,22 @@ namespace CS_FIleStreamApp.Models
         }
         public int ShiftStartTime { get; set; }
 
-        public int ShiftEndTime1(int ShiftStartTime)
-        {
-            //get { return _ShiftEndTime; }
+        //public int ShiftEndTime1(int ShiftStartTime)
+        //{
+        //    //get { return _ShiftEndTime; }
 
-            int a = ShiftStartTime;
-            if (a > 14)
-            {
-                a = a - 12;
-                ShiftEndTime = a - 2;
-            }
-            else
-            {
-                ShiftEndTime = a + 10;
-            }
-            return ShiftEndTime;
-        }
+        //    int a = ShiftStartTime;
+        //    if (a > 14)
+        //    {
+        //        a = a - 12;
+        //        ShiftEndTime = a - 2;
+        //    }
+        //    else
+        //    {
+        //        ShiftEndTime = a + 10;
+        //    }
+        //    return ShiftEndTime;
+        //}
         public int ShiftEndTime { get; set; }
 
         //public int ShiftEndTime 

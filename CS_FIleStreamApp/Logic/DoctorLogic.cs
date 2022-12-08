@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using CS_FIleStreamApp.Models;
 using System.Text.Json;
-//using Newtonsoft.Json;
+
 namespace CS_FIleStreamApp.Logic
 {
-    public class DoctorLogic : IDisposable
+    public class DoctorLogic 
     {
         FileStream fs;
         string filePath = string.Empty;
@@ -106,7 +106,7 @@ namespace CS_FIleStreamApp.Logic
 
         public void Dispose()
         {
-            fs.Dispose();
+            //fs.Dispose();
             GC.SuppressFinalize(this);
         }
     }   

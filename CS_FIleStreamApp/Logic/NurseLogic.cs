@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace CS_FIleStreamApp.Logic
 {
-    public class NurseLogic : IDisposable
+    public class NurseLogic
     {     
         FileStream fs;
         string filePath = string.Empty;
@@ -108,7 +108,7 @@ namespace CS_FIleStreamApp.Logic
 
         public void Dispose()
         {
-            fs.Dispose();
+            //fs.Dispose();
             GC.SuppressFinalize(this);
         }
     }

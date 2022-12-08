@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace CS_FIleStreamApp.Logic
 {
-    public class TechnicianLogic : IDisposable
+    public class TechnicianLogic 
     {
         FileStream fs;
         string filePath = string.Empty;
